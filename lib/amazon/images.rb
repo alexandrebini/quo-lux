@@ -1,6 +1,6 @@
 module Amazon
   class Images < Base
-    # using only hight resolution images for now
+    # using only high resolution images for now
     RANK_TEXT_REGEXP = /\"hiRes\"\:\"([^\,\}]*)\"/
 
     def value
