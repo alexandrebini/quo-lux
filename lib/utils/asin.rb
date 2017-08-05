@@ -1,6 +1,6 @@
 module Utils
   module Asin
-    ASIN_REGEXP = /\/dp\/([a-zA-Z0-9]{10})/i
+    ASIN_REGEXP = %r[\/dp\/([a-zA-Z0-9]{10})/i]
 
     class << self
       def from_url(url)

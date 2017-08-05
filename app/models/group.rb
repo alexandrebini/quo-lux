@@ -1,6 +1,5 @@
 class Group < ApplicationRecord
   extend FriendlyId
-  ASIN_REGEXP = /\/dp\/([a-zA-Z0-9]{10})/i
 
   belongs_to :user
   belongs_to :product
