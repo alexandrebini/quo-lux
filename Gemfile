@@ -8,6 +8,7 @@ end
 
 gem 'devise', '4.3.0'
 gem 'friendly_id', '5.2.1'
+gem 'mechanize', '2.7.5'
 gem 'memoist', '0.16.0'
 gem 'paper_trail', '7.1.0'
 gem 'pg', '0.21.0'
