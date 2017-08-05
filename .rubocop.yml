@@ -1,0 +1,40 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - db/schema.rb
+    - node_modules/**/*
+
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+
+Layout/TrailingBlankLines:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'db/**/*.rb'
+    - Guardfile
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/**/*.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Rails/ActionFilter:
+  Enabled: false
