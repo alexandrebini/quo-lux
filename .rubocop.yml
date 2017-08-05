@@ -19,6 +19,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'db/**/*.rb'
     - Guardfile
+    - 'config/initializers/simple_form_materialize.rb'
 
 Metrics/AbcSize:
   Exclude:
@@ -27,6 +28,8 @@ Metrics/AbcSize:
 
 Metrics/LineLength:
   Max: 100
+  Exclude:
+    - 'db/seeds.rb'
 
 Metrics/MethodLength:
   Exclude:

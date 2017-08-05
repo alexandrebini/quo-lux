@@ -1,7 +1,26 @@
 Product.create(
+  asin: 'B012CS70R8',
+  features: [
+    'Durable aluminum alloy',
+    '31/32\' tapered handle with All Sports grip',
+    '2 5/8\' barrel',
+    '1-Year Warranty'
+  ],
+  images: [
+    'https://images-na.ssl-images-amazon.com/images/I/31atFOoU%2BuL.jpg'
+  ],
+  inventory: 78,
+  price: 4_987,
+  rank: 57_842,
+  reviews_count: 29,
+  title: 'Easton S400 3 BBCOR Adult Baseball Bat'
+)
+
+Product.create(
   asin: 'B01MCZ1JGZ',
   features: [
-    'Louisville Slugger Genuine S3X Mixed Ash Wood Baseball Bat Louisville Slugger\'s adult wood bats are pulled from their original production line for some minor flaw that will not affect the bat\'s performance. These small production errors mean deep savings on superior bats ideal for practice, batting cages or even games. Bat Specifications Wood: Series 3X Ash Finishes: Natural Finish & Black Finish Turning Model: Mixed Cupped: Yes Available Sizes: $size$'],
+    'Louisville Slugger Genuine S3X Mixed Ash Wood Baseball Bat Louisville Slugger\'s adult wood bats are pulled from their original production line for some minor flaw that will not affect the bat\'s performance. These small production errors mean deep savings on superior bats ideal for practice, batting cages or even games. Bat Specifications Wood: Series 3X Ash Finishes: Natural Finish & Black Finish Turning Model: Mixed Cupped: Yes Available Sizes: $size$'
+  ],
   images: [
     'https://images-na.ssl-images-amazon.com/images/I/610R0VlP0EL._SL1500_.jpg',
     'https://images-na.ssl-images-amazon.com/images/I/51Vw4I1jNzL._SL1500_.jpg',
@@ -9,8 +28,8 @@ Product.create(
     'https://images-na.ssl-images-amazon.com/images/I/51cwBso-T0L._SL1500_.jpg'
   ],
   inventory: 100,
-  price: 1998,
-  rank: 8607,
+  price: 1_998,
+  rank: 8_607,
   reviews_count: 49,
   title: 'Louisville Slugger Genuine Series 3X Ash Mixed Baseball Bat'
 )
@@ -31,8 +50,8 @@ Product.create(
     'https://images-na.ssl-images-amazon.com/images/I/711Uoa%2BdyJL._SL1500_.jpg'
   ],
   inventory: 99,
-  price: 11995,
-  rank: 31176,
+  price: 11_995,
+  rank: 31_176,
   reviews_count: 11,
   title: 'Louisville Slugger Omaha 517 BBCOR (-3) Baseball Bat'
 )
@@ -48,8 +67,8 @@ Product.create(
     'https://images-na.ssl-images-amazon.com/images/I/719-euS5cfL._SL1500_.jpg'
   ],
   inventory: 123,
-  price: 3495,
-  rank: 88073,
+  price: 3_495,
+  rank: 88_073,
   reviews_count: 16,
   title: 'Rawlings  YBRR11 Raptor Youth Minus 11, 2 1/4 Barrel Bat'
 )
@@ -70,8 +89,8 @@ Product.create(
     'https://images-na.ssl-images-amazon.com/images/I/51isBDNfbbL._SL1000_.jpg'
   ],
   inventory: 12,
-  price: 1990,
-  rank: 75150,
+  price: 1_990,
+  rank: 75_150,
   reviews_count: 56,
   title: 'Barnett BB-W Wooden Baseball Bat'
 )
@@ -90,8 +109,8 @@ Product.create(
     'https://images-na.ssl-images-amazon.com/images/I/51ZKWqf9w0L._SL1500_.jpg'
   ],
   inventory: 68,
-  price: 15550,
-  rank: 45573,
+  price: 15_550,
+  rank: 45_573,
   reviews_count: 56,
   title: 'Marucci Cat 6 BBCOR Baseball Bat'
 )
@@ -101,5 +120,6 @@ user = User.create(email: 'demo@demo.com', password: '1234567', password_confirm
 Group.create(
   user: user,
   name: 'Baseball Bats',
-  products: Product.where(asin: %W[B01MCZ1JGZ B01KQJXB8W B011DXBGBO B00ID6X87A B00MIS8HDO])
+  product: Product.find_by(asin: 'B012CS70R8'),
+  products: Product.where(asin: %w[B01MCZ1JGZ B01KQJXB8W B011DXBGBO B00ID6X87A B00MIS8HDO])
 )

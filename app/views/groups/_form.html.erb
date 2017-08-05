@@ -1,4 +1,12 @@
-<%= simple_form_for group do |f| %>
+<%= simple_form_for setup_group(group) do |f| %>
   <%= f.input :name %>
+  <%= f.input :product_finder, label: 'ASIN or url', required: true %>
+
+  <%= field_set_tag 'Competitors' do %>
+    <%= f.simple_fields_for :competitors do |c| %>
+      <%= c.input :product_id %>
+    <% end %>
+  <% end %>
+
   <%= f.button :submit %>
 <% end %>
