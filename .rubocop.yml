@@ -20,6 +20,11 @@ Metrics/BlockLength:
     - 'db/**/*.rb'
     - Guardfile
 
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'db/**/*.rb'
+
 Metrics/LineLength:
   Max: 100
 

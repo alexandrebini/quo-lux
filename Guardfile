@@ -63,3 +63,8 @@ end
 guard :bundler_audit, run_on_start: true do
   watch('Gemfile.lock')
 end
+
+guard 'migrate' do
+  watch(%r{^db/migrate/(\d+).+\.rb})
+  watch('db/seeds.rb')
+end
