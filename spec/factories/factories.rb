@@ -1,3 +1,9 @@
 FactoryGirl.define do
-  sequence :hn_id
+  sequence :asin do |n|
+    "#{Faker::Code.asin}#{n}"
+  end
+
+  sequence :email do |n|
+    "user#{n}@gmail.com"
+  end
 end
