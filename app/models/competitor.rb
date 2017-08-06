@@ -6,4 +6,6 @@ class Competitor < ApplicationRecord
 
   validates :group, :product, presence: true
   validates_with Validators::MaxCompetitorsPerGroupValidator
+
+  scope :by_rank, -> { joins(:product).order('products.rank') }
 end

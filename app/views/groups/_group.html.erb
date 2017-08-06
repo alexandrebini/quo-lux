@@ -1,0 +1,42 @@
+<div class='card grey lighten-3'>
+  <div class='card-content'>
+    <span class='card-title'><%= group.name %></span>
+
+    <table class='highlight'>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Asin</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Reviews</th>
+          <th>Inventory</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% group.competitors.by_rank.each do |competitor| %>
+          <tr>
+            <td class='right-align'>
+              <%= number_with_delimiter(competitor.product.rank) %>
+            </td>
+            <td><%= competitor.product.asin %></td>
+            <td><%= competitor.product.title %></td>
+            <td class='right-align'>
+              <%= number_to_currency(competitor.product.price) %></td>
+            <td class='right-align'>
+              <%= number_with_delimiter(competitor.product.reviews_count) %></td>
+            <td class='right-align'>
+              <%= number_with_delimiter(competitor.product.inventory) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class='card-action'>
+    <%= link_to 'Show', group %>
+    <%= link_to 'Edit', edit_group_path(group) %>
+    <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
