@@ -1,0 +1,12 @@
+<% if rank.present? %>
+  <% previous = rank.first %>
+  <% current = rank.last %>
+
+  <div>
+    <strong>Rank</strong>
+    <ul>
+      <li style='color: red'><%= number_with_delimiter(previous) %></li>
+      <li style='color: green'><%= number_with_delimiter(current) %></li>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<% if inventory.present? %>
+  <% previous = inventory.first %>
+  <% current = inventory.last %>
+
+  <div>
+    <strong>Inventory</strong>
+    <ul>
+      <li style='color: red'><%= number_with_delimiter(previous) %></li>
+      <li style='color: green'><%= number_with_delimiter(current) %></li>
+    </ul>
+  </div>
+<% end %>

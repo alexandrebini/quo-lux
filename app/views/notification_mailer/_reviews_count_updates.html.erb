@@ -1,0 +1,12 @@
+<% if reviews_count.present? %>
+  <% previous = reviews_count.first %>
+  <% current = reviews_count.last %>
+
+  <div>
+    <strong>Reviews Count</strong>
+    <ul>
+      <li style='color: red'><%= number_with_delimiter(previous) %></li>
+      <li style='color: green'><%= number_with_delimiter(current) %></li>
+    </ul>
+  </div>
+<% end %>
