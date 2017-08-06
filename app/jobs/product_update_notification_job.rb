@@ -1,4 +1,4 @@
-class NotificationJob < ApplicationJob
+class ProductUpdateNotificationJob < ApplicationJob
   extend Memoist
 
   attr_accessor :product_id
@@ -6,6 +6,7 @@ class NotificationJob < ApplicationJob
   def perform(product_id)
     @product_id = product_id
     return if product.blank?
+
     product.users.find_each do |user|
       NotificationMailer.product_update(product_id, user.id).deliver_later
     end

@@ -40,6 +40,6 @@ class Product < ApplicationRecord
 
   def enqueue_notification
     return if NOTIFICABLE_ATTRIBUTES.none? { |attr| previous_changes.key?(attr) }
-    NotificationJob.perform_later(id)
+    ProductUpdateNotificationJob.perform_later(id)
   end
 end

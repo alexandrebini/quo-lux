@@ -47,6 +47,7 @@ end
 
 group :development do
   gem 'foreman', '~> 0.84.0'
+  gem 'letter_opener', '~> 1.4.1'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rack-livereload', '~> 0.3.16'
   gem 'spring', '~> 2.0.2'
