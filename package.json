@@ -1,5 +1,8 @@
 {
   "name": "quo-lux",
+  "engines": {
+    "node": "8.1.0"
+  },
   "private": true,
   "dependencies": {
     "jquery": "^3.2.1"

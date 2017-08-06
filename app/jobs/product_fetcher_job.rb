@@ -7,12 +7,12 @@ class ProductFetcherJob < ApplicationJob
   def perform(product_id)
     @product_id = product_id
     return if product.blank? || product.fetching?
-    product.fetching!
+    on_start
     fetch_product
   rescue StandardError => e
     on_error(e)
   ensure
-    product.pending! if product.fetching?
+    on_finish
   end
 
   def fetch_product
@@ -36,6 +36,10 @@ class ProductFetcherJob < ApplicationJob
     Amazon.get_product(product.url)
   end
 
+  def on_start
+    product.fetching!
+  end
+
   def on_error(error)
     product.update_attributes(
       status: next_status,
@@ -52,6 +56,11 @@ class ProductFetcherJob < ApplicationJob
       last_fetch_log: nil,
       last_fetch_at: Time.now
     )
+  end
+
+  def on_finish
+    return if product.blank?
+    product.pending! if product.fetching?
   end
 
   def next_status
