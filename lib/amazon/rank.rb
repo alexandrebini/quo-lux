@@ -1,6 +1,6 @@
 module Amazon
   class Rank < Base
-    RANK_TEXT_REGEXP = /Rank\:\s\#([^\s\}]*)/
+    RANK_TEXT_REGEXP = /\#[^\s\}]*/
 
     def value
       digits = rank_text.to_s.gsub(/[^\d]/, '')

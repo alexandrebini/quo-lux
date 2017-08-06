@@ -8,6 +8,8 @@ end
 
 gem 'devise', '4.3.0'
 gem 'friendly_id', '5.2.1'
+gem 'materialize-form', '1.0.8'
+gem 'materialize-sass', '0.100.1'
 gem 'mechanize', '2.7.5'
 gem 'memoist', '0.16.0'
 gem 'paper_trail', '7.1.0'
@@ -15,6 +17,7 @@ gem 'pg', '0.21.0'
 gem 'puma', '3.9.1'
 gem 'rails', '5.1.3'
 gem 'redis', '3.3.3'
+gem 'simple_form', '3.5.0'
 gem 'sucker_punch', '2.0.2'
 gem 'turbolinks', '5.0.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin jruby x64_mingw]
@@ -26,6 +29,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'guard-bundler', '~> 2.1'
   gem 'guard-bundler-audit', '~> 0.1.4'
+  gem 'guard-livereload', '~> 2.5.2', require: false
   gem 'guard-migrate', '~> 2.0.0'
   gem 'guard-rspec', '~> 4.7'
   gem 'guard-rubocop', '~> 1.3'
@@ -44,6 +48,7 @@ end
 group :development do
   gem 'foreman', '~> 0.84.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rack-livereload', '~> 0.3.16'
   gem 'spring', '~> 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

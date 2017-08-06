@@ -9,4 +9,6 @@ class Product < ApplicationRecord
 
   has_paper_trail
   friendly_id :title, use: %i[slugged finders]
+
+  scope :by_rank, -> { order(:rank) }
 end

@@ -3,14 +3,29 @@
   <head>
     <title>QuoLux</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <nav class='light-blue lighten-1' role='navigation'>
+        <div class='nav-wrapper container'>
+          <%= link_to 'QuoLux', root_path, class: 'brand-logo' %>
+          <ul class='right'>
+            <li>
+              <%= link_to 'GitHub', 'https://github.com/alexandrebini/quo-lux', target: :_blank %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
+
+    <div class='container'>
+      <% flash.each do |type, message| %>
+        <div class='card-panel blue-grey lighten-4'><%= message %></div>
+      <% end %>
+      <div class='content'><%= yield %></div>
+    </div>
   </body>
 </html>

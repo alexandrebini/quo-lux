@@ -1,0 +1,6 @@
+<h1>Groups</h1>
+<%= link_to 'New Group', new_group_path, class: 'btn waves-effect' %>
+<br>
+<br>
+
+<%= render partial: 'group', collection: @groups %>

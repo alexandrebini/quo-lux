@@ -3,16 +3,20 @@ require 'rails_helper'
 RSpec.describe Group do
   it { should have_db_column(:user_id).with_options(null: false) }
   it { should have_db_column(:name).with_options(null: false) }
+  it { should have_db_column(:product_id).with_options(null: false) }
   it { should have_db_column(:updated_at).with_options(null: false) }
   it { should have_db_index(:user_id) }
+  it { should have_db_index(:product_id) }
   it { should have_db_index(:slug).unique(true) }
 
   it { should belong_to(:user) }
+  it { should belong_to(:product) }
   it { should have_many(:competitors).dependent(:destroy) }
   it { should have_many(:products).through(:competitors) }
 
   describe 'validations' do
     it { should validate_presence_of(:user) }
+    it { should validate_presence_of(:product) }
     it { should validate_presence_of(:name) }
 
     describe '#validates max groups per user' do
