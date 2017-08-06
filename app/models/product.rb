@@ -1,7 +1,11 @@
 class Product < ApplicationRecord
   extend FriendlyId
+  REQUIRED_ATTRIBUTES = %i[title price rank reviews_count].freeze
+  NOTIFICABLE_ATTRIBUTES = %i[features images inventory price rank reviews_count title].freeze
 
   has_many :competitors, dependent: :destroy
+  has_many :groups, through: :competitors
+  has_many :users, through: :competitors
 
   validates :asin, presence: true, uniqueness: true
   validates :price, :reviews_count, :rank, :inventory,
@@ -13,9 +17,8 @@ class Product < ApplicationRecord
   enum status: %i[pending fetching ready]
   enum last_fetch_status: %i[unknown success error]
 
-  after_commit :enqueue_fetcher, on: %i[create update], if: proc { |record|
-    record.previous_changes.key?(:sin)
-  }
+  after_commit :enqueue_fetcher, on: %i[create update]
+  after_commit :enqueue_notification, on: :update
 
   scope :by_rank, -> { order(:rank) }
 
@@ -25,13 +28,18 @@ class Product < ApplicationRecord
   end
 
   def missing_attributes?
-    required_attributes = %i[title price rank reviews_count]
-    required_attributes.any? { |attr| read_attribute(attr).blank? }
+    REQUIRED_ATTRIBUTES.any? { |attr| read_attribute(attr).blank? }
   end
 
   private
 
   def enqueue_fetcher
+    return unless previous_changes.key?(:sin)
     ProductFetcherJob.perform_later(id)
+  end
+
+  def enqueue_notification
+    return if NOTIFICABLE_ATTRIBUTES.none? { |attr| previous_changes.key?(attr) }
+    ProductUpdateNotificationJob.perform_later(id)
   end
 end

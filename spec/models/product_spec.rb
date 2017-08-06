@@ -25,6 +25,8 @@ RSpec.describe Product do
   it { should have_db_index(:status) }
 
   it { should have_many(:competitors).dependent(:destroy) }
+  it { should have_many(:groups).through(:competitors) }
+  it { should have_many(:users).through(:competitors) }
 
   it { should validate_presence_of(:asin) }
   it { should_not validate_presence_of(:inventory) }
@@ -40,4 +42,28 @@ RSpec.describe Product do
 
   it { should define_enum_for(:status).with(%i[pending fetching ready]) }
   it { should define_enum_for(:last_fetch_status).with(%i[unknown success error]) }
+
+  describe 'Callbacks' do
+    it '#enqueue_fetcher' do
+      allow(subject).to receive(:previous_changes).and_return(sin: true)
+      expect(ProductFetcherJob).to receive(:perform_later)
+      subject.send(:enqueue_fetcher)
+    end
+
+    describe '#enqueue_notification' do
+      it 'no changes on notificable attributes' do
+        allow(subject).to receive(:previous_changes).and_return(updated_at: Time.now)
+        expect(ProductUpdateNotificationJob).to_not receive(:perform_later)
+        subject.send(:enqueue_notification)
+      end
+
+      %i[features images inventory price rank reviews_count title].each do |attr|
+        it "#{attr} changed" do
+          allow(subject).to receive(:previous_changes).and_return(attr => true)
+          expect(ProductUpdateNotificationJob).to receive(:perform_later)
+          subject.send(:enqueue_notification)
+        end
+      end
+    end
+  end
 end

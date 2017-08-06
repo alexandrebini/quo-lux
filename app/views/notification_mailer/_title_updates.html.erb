@@ -1,0 +1,12 @@
+<% if title.present? %>
+  <% previous = title.first %>
+  <% current = title.last %>
+
+  <div>
+    <strong>Title</strong>
+    <ul>
+      <li style='color: red'><%= previous %></li>
+      <li style='color: green'><%= current %></li>
+    </ul>
+  </div>
+<% end %>

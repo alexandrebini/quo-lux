@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe ProductFetcherJob, type: :job, vcr: true do
   let(:product) { create(:product, asin: 'B012CS70R8') }
-  let(:queue_adapter) { ActiveJob::Base.queue_adapter }
   subject(:job) { described_class.perform_later(product.id) }
   before { allow(job).to receive(:product).and_return(product) }
 
