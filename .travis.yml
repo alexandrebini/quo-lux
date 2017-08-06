@@ -1,4 +1,7 @@
+dist: trusty
 language: ruby
+addons:
+  postgresql: '9.6'
 before_script:
   - psql -c 'create database "quo-lux_test";' -U postgres
 notifications:
