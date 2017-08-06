@@ -6,7 +6,7 @@ class ProductFetcherJob < ApplicationJob
 
   def perform(product_id)
     @product_id = product_id
-    return if product.blank?
+    return if product.blank? || product.fetching?
     product.fetching!
     fetch_product
   rescue StandardError => e
