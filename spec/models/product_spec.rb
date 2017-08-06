@@ -45,7 +45,7 @@ RSpec.describe Product do
 
   describe 'Callbacks' do
     it '#enqueue_fetcher' do
-      allow(subject).to receive(:previous_changes).and_return(sin: true)
+      allow(subject).to receive(:previous_changes).and_return(asin: true)
       expect(ProductFetcherJob).to receive(:perform_later)
       subject.send(:enqueue_fetcher)
     end
