@@ -6,5 +6,5 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-  window.materializeForm.init()
+  window.materializeForm.init();
 })
