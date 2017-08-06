@@ -30,7 +30,7 @@ module GroupsHelper
   private
 
   def get_attribute_difference(product, attr)
-    previous = product.paper_trail.version_at(10.minute.ago).try(attr)
+    previous = product.paper_trail.version_at(1.day.ago).try(attr)
     return if previous.blank? || previous == product.read_attribute(attr)
     product.read_attribute(attr) - previous
   end
