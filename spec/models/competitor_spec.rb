@@ -9,6 +9,7 @@ RSpec.describe Competitor do
 
   it { should belong_to(:group) }
   it { should belong_to(:product) }
+  it { should have_one(:user).through(:group) }
 
   describe 'validations' do
     it { should validate_presence_of(:group) }

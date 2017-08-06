@@ -25,6 +25,8 @@ RSpec.describe Product do
   it { should have_db_index(:status) }
 
   it { should have_many(:competitors).dependent(:destroy) }
+  it { should have_many(:groups).through(:competitors) }
+  it { should have_many(:users).through(:competitors) }
 
   it { should validate_presence_of(:asin) }
   it { should_not validate_presence_of(:inventory) }
