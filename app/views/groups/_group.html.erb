@@ -15,21 +15,7 @@
       </thead>
 
       <tbody>
-        <% group.competitors.by_rank.each do |competitor| %>
-          <tr>
-            <td class='right-align'>
-              <%= number_with_delimiter(competitor.product.rank) %>
-            </td>
-            <td><%= competitor.product.asin %></td>
-            <td><%= competitor.product.title %></td>
-            <td class='right-align'>
-              <%= number_to_currency(competitor.product.price) %></td>
-            <td class='right-align'>
-              <%= number_with_delimiter(competitor.product.reviews_count) %></td>
-            <td class='right-align'>
-              <%= number_with_delimiter(competitor.product.inventory) %></td>
-          </tr>
-        <% end %>
+        <%= render partial: 'competitor', collection: group.competitors.by_rank %>
       </tbody>
     </table>
 

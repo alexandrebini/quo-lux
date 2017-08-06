@@ -34,7 +34,7 @@ class Product < ApplicationRecord
   private
 
   def enqueue_fetcher
-    return unless previous_changes.key?(:sin)
+    return unless previous_changes.key?(:asin)
     ProductFetcherJob.perform_later(id)
   end
 

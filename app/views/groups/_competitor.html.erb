@@ -1,0 +1,22 @@
+<tr>
+  <td class='right-align'>
+    <p><%= number_with_delimiter(competitor.product.rank) %></p>
+    <p><%= rank_change(competitor.product) %></p>
+  </td>
+  <td>
+    <%= competitor.product.asin %>
+  </td>
+  <td><%= competitor.product.title %></td>
+  <td class='right-align'>
+    <p><%= Money.new(competitor.product.price).format %></p>
+    <p><%= price_change(competitor.product) %></p>
+  </td>
+  <td class='right-align'>
+    <p><%= number_with_delimiter(competitor.product.reviews_count) %></p>
+    <p><%= reviews_count_change(competitor.product) %></p>
+  </td>
+  <td class='right-align'>
+    <p><%= number_with_delimiter(competitor.product.inventory) %></p>
+    <p><%= inventory_change(competitor.product) %></p>
+  </td>
+</tr>
