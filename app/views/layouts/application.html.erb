@@ -11,7 +11,7 @@
     <% if user_signed_in? %>
       <nav class='light-blue lighten-1' role='navigation'>
         <div class='nav-wrapper container'>
-          <a id='logo-container' href='#' class='brand-logo'>QuoLux</a>
+          <%= link_to 'QuoLux', root_path, class: 'brand-logo' %>
           <ul class='right'>
             <li>
               <%= link_to 'GitHub', 'https://github.com/alexandrebini/quo-lux', target: :_blank %>

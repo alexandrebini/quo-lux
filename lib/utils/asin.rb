@@ -8,6 +8,7 @@ module Utils
         url.match(ASIN_REGEXP).try(:captures).try(:first) || url
       end
 
+      # ignores contry store
       def url(asin)
         "http://www.amazon.com/dp/#{asin}"
       end

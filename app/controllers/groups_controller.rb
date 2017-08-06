@@ -43,6 +43,8 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :product_finder)
+    params.require(:group).permit(
+      :name, :product_finder, competitors_attributes: %i[id product_finder]
+    )
   end
 end
