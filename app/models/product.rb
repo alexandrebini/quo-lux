@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   extend FriendlyId
+  extend Memoist
+
   REQUIRED_ATTRIBUTES = %i[title price rank reviews_count].freeze
   VERSIONING_ATTRIBUTES = %i[features images inventory price rank reviews_count title].freeze
 
@@ -30,10 +32,16 @@ class Product < ApplicationRecord
     REQUIRED_ATTRIBUTES.any? { |attr| read_attribute(attr).blank? }
   end
 
+  def diff(date)
+    ProductDiff.new(self, date)
+  end
+
   private
 
   def enqueue_fetcher
     return unless previous_changes.key?(:asin)
     ProductFetcherJob.perform_later(id)
   end
+
+  memoize :diff
 end
