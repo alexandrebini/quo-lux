@@ -15,8 +15,7 @@ class NotificationMailer < ApplicationMailer
   private
 
   def changed_products(user)
-    # diff_source_date = Chronic.parse(DIFF_SOURCE_DATE)
-    diff_source_date = 1.hour.ago
+    diff_source_date = Chronic.parse(DIFF_SOURCE_DATE)
     user.products.map { |product| product.diff(diff_source_date) }.select(&:present?)
   end
 end
