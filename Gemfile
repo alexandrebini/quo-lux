@@ -23,7 +23,6 @@ gem 'turbolinks', '5.0.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin jruby x64_mingw]
 gem 'uglifier', '3.2.0'
 gem 'watir', '6.6.0'
-gem 'watir-rails', '2.0.0'
 gem 'webmock', '3.0.1'
 
 group :development, :test do

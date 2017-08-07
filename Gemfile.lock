@@ -293,10 +293,6 @@ GEM
       rack (>= 1.0)
     watir (6.6.0)
       selenium-webdriver (~> 3.4, >= 3.4.1)
-    watir-rails (2.0.0)
-      rack
-      rails
-      watir (>= 6.0.0.beta4)
     webmock (3.0.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -349,7 +345,6 @@ DEPENDENCIES
   uglifier (= 3.2.0)
   vcr (~> 3.0)
   watir (= 6.6.0)
-  watir-rails (= 2.0.0)
   webmock (= 3.0.1)
 
 RUBY VERSION
