@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'chronic', '0.10.2'
+gem 'cloudinary', '1.8.1'
 gem 'devise', '4.3.0'
 gem 'friendly_id', '5.2.1'
 gem 'materialize-form', '1.0.8'
@@ -56,3 +57,5 @@ group :development do
   gem 'spring', '~> 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+gem 'mailgun_rails', '0.9.0'

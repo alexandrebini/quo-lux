@@ -1,13 +1,6 @@
-<% @group.products.each do |product|
+<% @group.products.each do |product| %>
   <% diff = product.diff(1.day.ago) %>
-  <div class='row'>
-    <div class='col s6'>
-      <%= render partial: 'product/diff', locals: { product: diff.previous, type: :previous } %>
-    </div>
-    <div class='col s6'>
-      <%= render partial: 'product/diff', locals: { product: diff.current, type: :current } %>
-    </div>
-  </div>
+  <%= render partial: 'products/product_diff', locals: { product: product.diff(1.day.ago) } %>
 <% end %>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
