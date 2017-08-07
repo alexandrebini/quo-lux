@@ -1,20 +1,24 @@
-module Amazon
+class Amazon
   class Images < Base
-    # using only high resolution images for now
-    RANK_TEXT_REGEXP = /\"hiRes\"\:\"([^\,\}]*)\"/
-
     def value
+      enable_images!
       images.select { |image| image =~ URI.regexp }
     end
 
     private
 
-    def element
-      page.search('script')
+    def elements
+      browser.elements(css: '.imgTagWrapper img')
+    end
+
+    def enable_images!
+      browser.elements(css: '#altImages li.imageThumbnail img').each(&:hover)
     end
 
     def images
-      element.text.scan(RANK_TEXT_REGEXP).flatten.compact.uniq
+      elements.map { |img| img.attribute_value('src') }
     end
+
+    memoize :elements, :images
   end
 end

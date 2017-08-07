@@ -1,4 +1,4 @@
-module Amazon
+class Amazon
   class ReviewsCount < Base
     def value
       digits = element.text.to_s.gsub(/[^\d]/, '')
@@ -9,7 +9,9 @@ module Amazon
     private
 
     def element
-      page.search('.totalReviewCount')
+      browser.element(css: '.totalReviewCount')
     end
+
+    memoize :element
   end
 end

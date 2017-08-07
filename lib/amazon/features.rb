@@ -1,13 +1,15 @@
-module Amazon
+class Amazon
   class Features < Base
     def value
-      element.map { |r| r.text.strip }.compact.uniq
+      elements.map { |r| r.text.strip }.reject(&:blank?).compact.uniq
     end
 
     private
 
-    def element
-      page.search('#feature-bullets li span')
+    def elements
+      browser.elements(css: '#feature-bullets li span')
     end
+
+    memoize :elements
   end
 end

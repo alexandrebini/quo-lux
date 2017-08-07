@@ -33,7 +33,7 @@ class ProductFetcherJob < ApplicationJob
   end
 
   def amazon_product
-    Amazon.get_product(product.url)
+    Amazon.get_product(product.asin)
   end
 
   def on_start

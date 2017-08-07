@@ -10,7 +10,6 @@ gem 'devise', '4.3.0'
 gem 'friendly_id', '5.2.1'
 gem 'materialize-form', '1.0.8'
 gem 'materialize-sass', '0.100.1'
-gem 'mechanize', '2.7.5'
 gem 'memoist', '0.16.0'
 gem 'money', '6.9.0'
 gem 'paper_trail', '7.1.0'
@@ -23,6 +22,7 @@ gem 'sucker_punch', '2.0.2'
 gem 'turbolinks', '5.0.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin jruby x64_mingw]
 gem 'uglifier', '3.2.0'
+gem 'watir', '6.6.0'
 gem 'webmock', '3.0.1'
 
 group :development, :test do

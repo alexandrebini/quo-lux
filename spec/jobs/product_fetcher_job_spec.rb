@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe ProductFetcherJob, type: :job, vcr: true do
   let(:product) { create(:product, asin: 'B012CS70R8') }
   subject(:job) { described_class.perform_later(product.id) }
-  before { allow(job).to receive(:product).and_return(product) }
+  before do
+    allow(job).to receive(:product).and_return(product)
+    allow(job).to receive(:amazon_product).and_return(attributes_for(:product))
+  end
 
   describe '#perform' do
     context 'invalid product' do

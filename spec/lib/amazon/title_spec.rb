@@ -1,15 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Amazon::Title do
-  let(:html) do
-    <<-EOS
-      <span id='productTitle'>
-        Louisville Slugger Genuine Series 3X Ash Mixed Baseball Bat
-      </span>
-    EOS
-  end
-  let(:page) { Nokogiri.parse(html) }
-  subject { described_class.new(page) }
+  let(:element) { OpenStruct.new(text: ' Louisville Slugger Genuine Series 3X ') }
+  subject { described_class.new(nil) }
+  before { allow(subject).to receive(:element).and_return(element) }
 
-  its(:value) { is_expected.to eql('Louisville Slugger Genuine Series 3X Ash Mixed Baseball Bat') }
+  its(:value) { is_expected.to eql('Louisville Slugger Genuine Series 3X') }
 end
