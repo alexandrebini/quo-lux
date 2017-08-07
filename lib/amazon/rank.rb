@@ -15,7 +15,7 @@ class Amazon
         browser.element(id: 'SalesRank'),
         browser.element(id: 'productDetails_detailBullets_sections1')
       ]
-      elements.find { |element| element.exists? }
+      elements.find(&:exists?)
     end
 
     def rank_text
