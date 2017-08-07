@@ -7,7 +7,6 @@ class Amazon
     private
 
     def elements
-      byebug
       browser.elements(css: '#feature-bullets li span')
     end
 
