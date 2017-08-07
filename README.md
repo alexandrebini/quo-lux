@@ -2,7 +2,7 @@
 
 ### Demo
 - https://quo-lux.herokuapp.com/
-- user: demo@demo.com
+- user: quo-lux@mailinator.com
 - passwd: 1234567
 
 
@@ -26,6 +26,7 @@
 
 ### Notifications
 - When the product is updated and `features`, `images`, `inventory`, `price`, `rank`, `reviews_count` or `title` changes, we deliver an notification showing this differences to each user that are monitoring this product.
+- https://www.mailinator.com/v2/inbox.jsp?query=quo-lux
 
 
 ### Tasks
