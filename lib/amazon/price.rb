@@ -1,7 +1,6 @@
 class Amazon
   class Price < Base
     def value
-      return unless element.exists?
       digits = element.text.gsub(/[^\d]/, '')
       return if digits.blank?
       digits.to_i
@@ -10,7 +9,9 @@ class Amazon
     private
 
     def element
-      browser.element(id: 'priceblock_ourprice')
+      element = browser.element(id: 'priceblock_ourprice')
+      return unless element.exists?
+      element
     end
 
     memoize :element

@@ -43,7 +43,8 @@ class Amazon
   private
 
   def browser
-    Watir::Browser.new(:phantomjs)
+    driver = Rails.env.production? ? :phantomjs : :chrome
+    Watir::Browser.new(driver)
   end
 
   def get_attribute(attr)
@@ -65,8 +66,11 @@ class Amazon
   end
 
   def goto_cart_page
+    add_to_chart = browser.form(id: 'addToCart')
+    browser.wait_until(timeout: 2) { add_to_chart.exists? }
     return false if browser.element(id: 'outOfStock').exists?
-    browser.form(id: 'addToCart').submit
+    add_to_chart.submit
+    browser.wait_until(timeout: 2) { !add_to_chart.exists? }
     browser.link(id: 'nav-cart').click
     true
   end

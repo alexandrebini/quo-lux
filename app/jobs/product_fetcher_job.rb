@@ -44,7 +44,7 @@ class ProductFetcherJob < ApplicationJob
     product.update_attributes(
       status: next_status,
       last_fetch_status: :error,
-      last_fetch_log: error,
+      last_fetch_log: error_log(error),
       last_fetch_at: Time.now
     )
   end
@@ -65,6 +65,12 @@ class ProductFetcherJob < ApplicationJob
 
   def next_status
     product.missing_attributes? ? :pending : :ready
+  end
+
+  def error_log(error)
+    backtrace = error.try(:backtrace).try(:join, "\n")
+    return error if backtrace.blank?
+    "#{error}\n#{backtrace}"
   end
 
   memoize :product, :amazon_product

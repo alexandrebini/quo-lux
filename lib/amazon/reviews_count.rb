@@ -1,6 +1,7 @@
 class Amazon
   class ReviewsCount < Base
     def value
+      return if element.blank?
       digits = element.text.to_s.gsub(/[^\d]/, '')
       return if digits.blank?
       digits.to_i
@@ -9,7 +10,9 @@ class Amazon
     private
 
     def element
-      browser.element(css: '.totalReviewCount')
+      element = browser.element(css: '.totalReviewCount')
+      return unless element.exists?
+      element
     end
 
     memoize :element

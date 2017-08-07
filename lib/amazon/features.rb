@@ -7,7 +7,7 @@ class Amazon
     private
 
     def elements
-      browser.elements(css: '#feature-bullets li span')
+      browser.elements(css: '#feature-bullets li span').select(&:exists?)
     end
 
     memoize :elements
