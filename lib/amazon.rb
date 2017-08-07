@@ -1,5 +1,3 @@
-require 'watir'
-
 class Amazon
   extend Memoist
 
@@ -20,23 +18,24 @@ class Amazon
     fetch_product_page_attributes!
     fetch_cart_page_attributes!
     attributes
+  ensure
+    browser.try(:close)
   end
 
   def attributes
-    (PRODUCT_PAGE_ATTRIBUTES + CART_PAGE_ATTRIBUTES).map do |attr|
-      [attr, self.send(attr)]
-    end.to_h
+    attribute_names = PRODUCT_PAGE_ATTRIBUTES + CART_PAGE_ATTRIBUTES
+    attribute_names.map { |attr| [attr, send(attr)] }.to_h
   end
 
   def fetch_product_page_attributes!
     browser.goto(url)
-    PRODUCT_PAGE_ATTRIBUTES.each { |attr| self.send("#{attr}=", get_attribute(attr)) }
+    PRODUCT_PAGE_ATTRIBUTES.each { |attr| get_attribute(attr) }
   end
 
   def fetch_cart_page_attributes!
-    # todo
-    # form = browser.form(id: 'addToCart').submit
-    # browser.link(id: 'nav-cart').click
+    browser.form(id: 'addToCart').submit
+    browser.link(id: 'nav-cart').click
+    CART_PAGE_ATTRIBUTES.each { |attr| get_attribute(attr) }
   end
 
   private
@@ -47,12 +46,13 @@ class Amazon
 
   def get_attribute(attr)
     klass = "Amazon::#{ attr.to_s.camelize }".constantize
-    klass.new(browser).value
+    value = klass.new(browser).value
+    send("#{attr}=", value)
   end
 
   def url
     Utils::Asin.url(asin)
   end
 
-  memoize :browser
+  memoize :browser, :url
 end

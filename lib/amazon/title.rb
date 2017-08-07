@@ -9,5 +9,7 @@ class Amazon
     def element
       browser.element(id: 'productTitle')
     end
+
+    memoize :element
   end
 end

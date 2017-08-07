@@ -17,5 +17,7 @@ class Amazon
     def rank_text
       element.text.match(RANK_TEXT_REGEXP).to_a.first
     end
+
+    memoize :element
   end
 end

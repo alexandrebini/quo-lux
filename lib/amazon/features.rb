@@ -9,5 +9,7 @@ class Amazon
     def elements
       browser.elements(css: '#feature-bullets li span')
     end
+
+    memoize :elements
   end
 end

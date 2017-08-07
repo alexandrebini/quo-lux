@@ -1,5 +1,6 @@
 class Amazon
   class Base
+    extend Memoist
     attr_reader :browser
 
     def initialize(browser)

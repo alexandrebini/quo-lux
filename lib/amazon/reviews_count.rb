@@ -11,5 +11,7 @@ class Amazon
     def element
       browser.element(css: '.totalReviewCount')
     end
+
+    memoize :element
   end
 end

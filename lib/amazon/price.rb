@@ -20,5 +20,7 @@ class Amazon
       return if digits.blank?
       digits.to_i
     end
+
+    memoize :element
   end
 end
