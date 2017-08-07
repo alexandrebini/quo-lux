@@ -18,7 +18,6 @@ class Product < ApplicationRecord
   enum last_fetch_status: %i[unknown success error]
 
   after_commit :enqueue_fetcher, on: %i[create update]
-  after_commit :enqueue_notification, on: :update
 
   scope :by_rank, -> { order(:rank) }
 
@@ -36,10 +35,5 @@ class Product < ApplicationRecord
   def enqueue_fetcher
     return unless previous_changes.key?(:asin)
     ProductFetcherJob.perform_later(id)
-  end
-
-  def enqueue_notification
-    return if NOTIFICABLE_ATTRIBUTES.none? { |attr| previous_changes.key?(attr) }
-    ProductUpdateNotificationJob.perform_later(id)
   end
 end

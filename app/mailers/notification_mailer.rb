@@ -1,7 +1,6 @@
 class NotificationMailer < ApplicationMailer
-  def product_update(product_id, user_id)
+  def daily_digest(user_id)
     @user = User.find_by(id: user_id)
-    @product = Product.find_by(id: product_id)
     @changeset = @product.versions.last.changeset
 
     return if @product.blank? || @user.blank? || !changed?(@product)
