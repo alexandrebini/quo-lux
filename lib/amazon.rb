@@ -43,7 +43,7 @@ class Amazon
   private
 
   def browser
-    Watir::Browser.new
+    Watir::Browser.new(:phantomjs)
   end
 
   def get_attribute(attr)
