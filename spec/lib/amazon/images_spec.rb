@@ -1,40 +1,29 @@
 require 'rails_helper'
 
+Element = Struct.new(:url) do
+  def attribute_value(_attr)
+    url
+  end
+end
+
 RSpec.describe Amazon::Images do
-  let(:first_image) do
-    {
-      high: 'https://images-na.ssl-images-amazon.com/images/I/71XaxP6VRgL.jpg',
-      thumb: 'https://images-na.ssl-images-amazon.com/images/I/31Pral-j3cL.jpg'
-    }
+  let(:elements) do
+    [
+      Element.new('https://amazon.com/images/I/71XaxP6VRgL.jpg'),
+      Element.new('https://amazon.com/images/I/31Pral-j3cL.jpg'),
+      Element.new('foo'),
+      Element.new('')
+    ]
   end
 
-  let(:second_image) do
-    {
-      high: 'https://images-na.ssl-images-amazon.com/images/I/71XaxP6VRgL.jpg',
-      thumb: 'https://images-na.ssl-images-amazon.com/images/I/31Pral-j3cL.jpg'
-    }
+  subject { described_class.new(nil) }
+  before do
+    allow(subject).to receive(:enable_images!).and_return(true)
+    allow(subject).to receive(:elements).and_return(elements)
   end
 
-  let(:html) do
-    <<-EOS
-      <script>
-        var data = {
-          'colorImages': {
-            "initial":[
-              { "hiRes":"#{first_image[:high]}", "thumb":"#{first_image[:thumb]}" },
-              { "hiRes":"#{second_image[:high]}", "thumb":"#{second_image[:thumb]}" }
-            ]
-          }
-        };
-        return data;
-      </script>
-    EOS
-  end
-  let(:page) { Nokogiri.parse(html) }
-  subject { described_class.new(page) }
-
-  its(:value) { is_expected.to include(first_image[:high]) }
-  its(:value) { is_expected.to_not include(first_image[:thumb]) }
-  its(:value) { is_expected.to include(second_image[:high]) }
-  its(:value) { is_expected.to_not include(second_image[:thumb]) }
+  its(:value) { is_expected.to include('https://amazon.com/images/I/71XaxP6VRgL.jpg') }
+  its(:value) { is_expected.to include('https://amazon.com/images/I/31Pral-j3cL.jpg') }
+  its(:value) { is_expected.to_not include('foo') }
+  its(:value) { is_expected.to_not include('') }
 end

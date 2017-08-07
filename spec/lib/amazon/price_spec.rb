@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Amazon::Price do
-  let(:page) { Nokogiri.parse("<span id='priceblock_ourprice'>$19.98 - $49.10</span>") }
-  subject { described_class.new(page) }
+  let(:element) { OpenStruct.new(text: '$19.98 - $49.10') }
+  subject { described_class.new(nil) }
+  before { allow(subject).to receive(:element).and_return(element) }
 
   its(:value) { is_expected.to eql(1998) }
   its(:value) { is_expected.to_not eql(4910) }
