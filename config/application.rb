@@ -16,11 +16,5 @@ module QuoLux
     config.active_record.timestamped_migrations = false
     config.load_defaults 5.1
     config.eager_load_paths << Rails.root.join('lib')
-
-    config.action_mailer.delivery_method = :mailgun
-    config.action_mailer.mailgun_settings = {
-      api_key: '80051aaa36fd9b466a8ab06895457d05',
-      domain: 'sandboxef69c7584d5a4540ae3194e3c9ad1794.mailgun.org'
-    }
   end
 end
