@@ -1,18 +1,21 @@
 class NotificationMailer < ApplicationMailer
+  DIFF_SOURCE_DATE = Rails.application.secrets.fetch(
+    :daily_diggest_source_date,
+    'yesterday at 00:00:00'
+  ).freeze
+
   def daily_digest(user_id)
     @user = User.find_by(id: user_id)
-    @changeset = @product.versions.last.changeset
+    @products = changed_products(@user)
+    return if @user.blank? || @products.blank?
 
-    return if @product.blank? || @user.blank? || !changed?(@product)
-
-    mail(to: @user.email, subject: "[Product Update] #{@product.title}")
+    mail(to: @user.email, subject: "[Quo-Lux] Daily Digest #{Date.today}")
   end
 
   private
 
-  def changed?(product)
-    product.versions.last.changeset.any? do |key, _value|
-      Product::NOTIFICABLE_ATTRIBUTES.include?(key.to_sym)
-    end
+  def changed_products(user)
+    diff_source_date = Chronic.parse(DIFF_SOURCE_DATE)
+    user.products.map { |product| product.diff(diff_source_date) }.select(&:present?)
   end
 end

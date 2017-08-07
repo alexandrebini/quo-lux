@@ -1,6 +1,6 @@
 <% if images.present? %>
-  <% previous = images.first %>
-  <% current = images.last %>
+  <% previous = images.first.to_a %>
+  <% current = images.last.to_a %>
 
   <div>
     <strong>Images</strong>

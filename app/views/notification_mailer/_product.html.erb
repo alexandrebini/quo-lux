@@ -1,0 +1,26 @@
+<% color = type == :previous ? 'red' : 'teal' %>
+
+<div class="card <%= color %> darken-4">
+  <div class='card-content white-text'>
+    <% if product.present? %>
+      <span class='card-title'><%= product.title %></span>
+      <p>I am a very simple card. I am good at containing small bits of information.
+      I am convenient because I require little markup to use effectively.</p>
+      <p>I am a very simple card. I am good at containing small bits of information.
+      I am convenient because I require little markup to use effectively.</p>
+      <p>I am a very simple card. I am good at containing small bits of information.
+      I am convenient because I require little markup to use effectively.</p>
+      <p>I am a very simple card. I am good at containing small bits of information.
+      I am convenient because I require little markup to use effectively.</p>
+
+     <div class='card-action'>
+        <a>Rank: #<%= number_with_delimiter(product.rank)%></a>
+        <a>Price: <%= Money.new(product.price).format%></a>
+        <a>Reviews: <%= number_with_delimiter(product.reviews_count)%></a>
+        <a>Inventory: <%= number_with_delimiter(product.inventory)%></a>
+      </div>
+    <% else %>
+      <span class='card-title'>New Product</span>
+    <% end %>
+  </div>
+</div>

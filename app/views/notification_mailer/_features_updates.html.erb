@@ -1,6 +1,6 @@
 <% if features.present? %>
-  <% previous = features.first %>
-  <% current = features.last %>
+  <% previous = features.first.to_a %>
+  <% current = features.last.to_a %>
 
   <div>
     <strong>Features</strong>

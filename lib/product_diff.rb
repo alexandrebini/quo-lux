@@ -8,7 +8,7 @@ class ProductDiff
   end
 
   def changeset
-    return {} if product.blank? || previous.blank?
+    return {} if product.blank?
 
     {}.tap do |changeset|
       Product::VERSIONING_ATTRIBUTES.each do |attr|
@@ -19,15 +19,14 @@ class ProductDiff
     end
   end
 
-  private
-
-  def previous
-    product.paper_trail.version_at(date)
-  end
-
   def diff(attr)
+    return if product.blank?
     return if previous[attr] == current[attr]
     [previous[attr], current[attr]]
+  end
+
+  def previous
+    product.paper_trail.version_at(date) || {}
   end
 
   memoize :changeset, :diff, :previous

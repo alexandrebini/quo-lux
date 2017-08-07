@@ -1,9 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+<% @group.products.each do |product|
+  <% diff = product.diff(1.day.ago) %>
+  <div class='row'>
+    <div class='col s6'>
+      <%= render partial: 'product/diff', locals: { product: diff.previous, type: :previous } %>
+    </div>
+    <div class='col s6'>
+      <%= render partial: 'product/diff', locals: { product: diff.current, type: :current } %>
+    </div>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

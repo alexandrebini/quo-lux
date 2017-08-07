@@ -1,12 +1,1 @@
-<p>
-  Product Update Notification for <%= @product.asin %>
-  <%= link_to @product.title, @product.url %>
-</p>
-
-<%= render partial: 'title_updates', locals: { title: @changeset[:title] } %>
-<%= render partial: 'rank_updates', locals: { rank: @changeset[:rank] } %>
-<%= render partial: 'price_updates', locals: { price: @changeset[:price] } %>
-<%= render partial: 'reviews_count_updates', locals: { reviews_count: @changeset[:reviews_count] } %>
-<%= render partial: 'features_updates', locals: { features: @changeset[:features] } %>
-<%= render partial: 'images_updates', locals: { images: @changeset[:images] } %>
-<%= render partial: 'inventory_updates', locals: { inventory: @changeset[:inventory] } %>
+<%= render partial: 'product_diff', collection: @products, as: :product %>
