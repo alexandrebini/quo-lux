@@ -11,7 +11,6 @@ FactoryGirl.define do
 
     after(:build) do |product|
       product.class.skip_callback(:commit, :after, :enqueue_fetcher, raise: false)
-      product.class.skip_callback(:commit, :after, :enqueue_notification, raise: false)
     end
   end
 end

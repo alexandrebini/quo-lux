@@ -1,7 +1,9 @@
 class Product < ApplicationRecord
   extend FriendlyId
+  extend Memoist
+
   REQUIRED_ATTRIBUTES = %i[title price rank reviews_count].freeze
-  NOTIFICABLE_ATTRIBUTES = %i[features images inventory price rank reviews_count title].freeze
+  VERSIONING_ATTRIBUTES = %i[features images inventory price rank reviews_count title].freeze
 
   has_many :competitors, dependent: :destroy
   has_many :groups, through: :competitors
@@ -18,7 +20,6 @@ class Product < ApplicationRecord
   enum last_fetch_status: %i[unknown success error]
 
   after_commit :enqueue_fetcher, on: %i[create update]
-  after_commit :enqueue_notification, on: :update
 
   scope :by_rank, -> { order(:rank) }
 
@@ -31,6 +32,10 @@ class Product < ApplicationRecord
     REQUIRED_ATTRIBUTES.any? { |attr| read_attribute(attr).blank? }
   end
 
+  def diff(date)
+    ProductDiff.new(self, date)
+  end
+
   private
 
   def enqueue_fetcher
@@ -38,8 +43,5 @@ class Product < ApplicationRecord
     ProductFetcherJob.perform_later(id)
   end
 
-  def enqueue_notification
-    return if NOTIFICABLE_ATTRIBUTES.none? { |attr| previous_changes.key?(attr) }
-    ProductUpdateNotificationJob.perform_later(id)
-  end
+  memoize :diff
 end

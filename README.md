@@ -25,9 +25,10 @@
 
 
 ### Notifications
-- When the product is updated and `features`, `images`, `inventory`, `price`, `rank`, `reviews_count` or `title` changes, we deliver an notification showing this differences to each user that are monitoring this product.
-- https://www.mailinator.com/v2/inbox.jsp?query=quo-lux
+- We deliver a daily digest notification, with all product that changed after `yesterday at 00:00:00` (configurable via `secrets.yml`) 
+- I'm using an mailgun sandbox. Emails are just sent to `quo-lux@mailinator.com`. See the inbox [here](https://www.mailinator.com/v2/inbox.jsp?query=quo-lux)
 
 
 ### Tasks
 - `rails products:fetch`: Fetch all products and delivers notifications.
+- `rails notifications:deliver`: Notifies users for changes happened on monitored competirors.

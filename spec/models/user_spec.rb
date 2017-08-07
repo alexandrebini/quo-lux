@@ -11,6 +11,7 @@ RSpec.describe User do
   it { should have_db_index(:reset_password_token).unique(true) }
 
   it { should have_many(:groups).dependent(:destroy) }
+  it { should have_many(:products).through(:groups).source(:products) }
 
   describe '#validates max groups' do
     let(:max_count) { Validators::MaxGroupsPerUserValidator::MAX_GROUPS_PER_USER }

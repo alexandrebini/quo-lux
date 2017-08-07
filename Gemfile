@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'chronic', '0.10.2'
+gem 'cloudinary', '1.8.1'
 gem 'devise', '4.3.0'
 gem 'friendly_id', '5.2.1'
 gem 'materialize-form', '1.0.8'
@@ -14,6 +16,7 @@ gem 'memoist', '0.16.0'
 gem 'money', '6.9.0'
 gem 'paper_trail', '7.1.0'
 gem 'pg', '0.21.0'
+gem 'premailer-rails', '1.9.7'
 gem 'puma', '3.9.1'
 gem 'rails', '5.1.3'
 gem 'redis', '3.3.3'
@@ -53,4 +56,8 @@ group :development do
   gem 'rack-livereload', '~> 0.3.16'
   gem 'spring', '~> 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+  gem 'mailgun_rails', '0.9.0'
 end

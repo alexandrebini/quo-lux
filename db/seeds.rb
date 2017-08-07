@@ -115,7 +115,7 @@ Product.create(
   title: 'Marucci Cat 6 BBCOR Baseball Bat'
 )
 
-user = User.create(email: 'demo@demo.com', password: '1234567', password_confirmation: '1234567')
+user = User.create(email: 'quo-lux@mailinator.com', password: '1234567', password_confirmation: '1234567')
 
 Group.create(
   user: user,
