@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   extend FriendlyId
   REQUIRED_ATTRIBUTES = %i[title price rank reviews_count].freeze
-  NOTIFICABLE_ATTRIBUTES = %i[features images inventory price rank reviews_count title].freeze
+  VERSIONING_ATTRIBUTES = %i[features images inventory price rank reviews_count title].freeze
 
   has_many :competitors, dependent: :destroy
   has_many :groups, through: :competitors
