@@ -1,4 +1,4 @@
-module Amazon
+class Amazon
   class Rank < Base
     RANK_TEXT_REGEXP = /\#[^\s\}]*/
 
@@ -11,7 +11,7 @@ module Amazon
     private
 
     def element
-      page.search('#SalesRank')
+      browser.element(id: 'SalesRank')
     end
 
     def rank_text

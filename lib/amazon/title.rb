@@ -1,7 +1,13 @@
-module Amazon
+class Amazon
   class Title < Base
     def value
-      page.search('#productTitle').text.strip
+      element.text.strip
+    end
+
+    private
+
+    def element
+      browser.element(id: 'productTitle')
     end
   end
 end

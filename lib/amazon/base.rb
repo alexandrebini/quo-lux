@@ -1,9 +1,9 @@
-module Amazon
+class Amazon
   class Base
-    attr_reader :page
+    attr_reader :browser
 
-    def initialize(page)
-      @page = page
+    def initialize(browser)
+      @browser = browser
     end
 
     def value

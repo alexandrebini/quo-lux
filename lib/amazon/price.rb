@@ -1,4 +1,4 @@
-module Amazon
+class Amazon
   class Price < Base
     # assuming just the first price in range for now
     def value
@@ -8,7 +8,7 @@ module Amazon
     private
 
     def element
-      page.search('#priceblock_ourprice')
+      browser.element(id: 'priceblock_ourprice')
     end
 
     def price_range
