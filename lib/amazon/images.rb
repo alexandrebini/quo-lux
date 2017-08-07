@@ -7,18 +7,13 @@ class Amazon
     private
 
     def elements
-      browser.elements(css: '#altImages li.imageThumbnail img')
+      thumbs = browser.elements(css: '#altImages li.imageThumbnail img')
+      thumbs.each(&:hover)
+      browser.elements(css: '.imgTagWrapper img')
     end
 
     def images
-      elements.each do |img|
-        img.hover
-        current_image_url
-      end.flatten.compact.uniq
-    end
-
-    def current_image_url
-      browser.element(css: '.imgTagWrapper img').attribute_value('src')
+      elements.map { |img| img.attribute_value('src') }
     end
   end
 end

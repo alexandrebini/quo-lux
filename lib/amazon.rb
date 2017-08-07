@@ -24,13 +24,13 @@ class Amazon
 
   def attributes
     (PRODUCT_PAGE_ATTRIBUTES + CART_PAGE_ATTRIBUTES).map do |attr|
-      [attr, self[attr]]
+      [attr, self.send(attr)]
     end.to_h
   end
 
   def fetch_product_page_attributes!
     browser.goto(url)
-    PRODUCT_PAGE_ATTRIBUTES.each { |attr| self[attr] = get_attribute(attr) }
+    PRODUCT_PAGE_ATTRIBUTES.each { |attr| self.send("#{attr}=", get_attribute(attr)) }
   end
 
   def fetch_cart_page_attributes!
