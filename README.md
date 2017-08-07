@@ -1,9 +1,9 @@
 # README
 
 ### Demo
-https://quo-lux.herokuapp.com/
-user: demo@demo.com
-passwd: 1234567
+- https://quo-lux.herokuapp.com/
+- user: demo@demo.com
+- passwd: 1234567
 
 
 ### Models
@@ -25,7 +25,7 @@ passwd: 1234567
 
 
 ### Notifications
-When the product is updated and `features`, `images`, `inventory`, `price`, `rank`, `reviews_count` or `title` changes, we deliver an notification showing this differences to each user that are monitoring this product.
+- When the product is updated and `features`, `images`, `inventory`, `price`, `rank`, `reviews_count` or `title` changes, we deliver an notification showing this differences to each user that are monitoring this product.
 
 
 ### Tasks
