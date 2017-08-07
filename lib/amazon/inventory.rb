@@ -26,7 +26,6 @@ class Amazon
     def alert_quantity
       return if quantity_alert_message.blank?
       matcher = quantity_alert_message.match(ALERT_QUANTITY_REGEXP).to_a
-      byebug
       digits = matcher.last.to_s.gsub(/[^\d]/, '')
       return if digits.blank?
       digits.to_i
