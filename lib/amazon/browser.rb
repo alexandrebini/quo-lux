@@ -39,7 +39,7 @@ class Amazon
     end
 
     def driver_options
-      return unless Rails.env.production?
+      return {} unless Rails.env.production?
       { chromeOptions: { binary: '/app/.apt/usr/bin/google-chrome' } }
     end
 
