@@ -28,12 +28,13 @@ class Amazon
   end
 
   def fetch_product_page_attributes
-    goto_product_page
+    url = Utils::Asin.url(asin)
+    browser.goto_product_page(url, select_default: true)
     PRODUCT_PAGE_ATTRIBUTES.each { |attr| get_attribute(attr) }
   end
 
   def fetch_cart_page_attributes
-    if goto_cart_page
+    if browser.goto_cart_page
       CART_PAGE_ATTRIBUTES.each { |attr| get_attribute(attr) }
     else
       self.inventory = 0
@@ -43,8 +44,7 @@ class Amazon
   private
 
   def browser
-    driver = Rails.env.production? ? :phantomjs : :chrome
-    Watir::Browser.new(driver)
+    Amazon::Browser.new
   end
 
   def get_attribute(attr)
@@ -53,27 +53,5 @@ class Amazon
     send("#{attr}=", value)
   end
 
-  def url
-    Utils::Asin.url(asin)
-  end
-
-  def goto_product_page
-    browser.goto(url)
-    size_select = browser.select(id: 'native_dropdown_selected_size_name')
-    return if !size_select.exists? || size_select.value != '-1'
-    main_option = size_select.options.find { |option| option.attribute_value('value') != '-1' }
-    main_option.click
-  end
-
-  def goto_cart_page
-    add_to_chart = browser.form(id: 'addToCart')
-    browser.wait_until(timeout: 2) { add_to_chart.exists? }
-    return false if browser.element(id: 'outOfStock').exists?
-    add_to_chart.submit
-    browser.wait_until(timeout: 2) { !add_to_chart.exists? }
-    browser.link(id: 'nav-cart').click
-    true
-  end
-
-  memoize :browser, :url
+  memoize :browser
 end
