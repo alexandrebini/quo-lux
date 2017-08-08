@@ -14,6 +14,8 @@ class Amazon
     def set_quantity!
       select = browser.select(name: 'quantity')
       browser.wait_until(timeout: 2) { select.exists? }
+      return unless select.exists?
+
       select.select_value('10')
       browser.text_field(name: 'quantityBox').set(MAX_VALUE)
       browser.text_field(name: 'quantityBox').send_keys(:enter)
