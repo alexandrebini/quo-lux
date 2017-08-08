@@ -19,7 +19,7 @@ class Amazon
 
       add_to_chart.submit
       wait_until(timeout: 30) { !add_to_chart.exists? }
-      browser.link(id: 'nav-cart').click
+      browser.goto('https://www.amazon.com/gp/cart/view.html')
       true
     end
 
