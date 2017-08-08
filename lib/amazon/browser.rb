@@ -4,8 +4,7 @@ class Amazon
     delegate :close, :element, :elements, :select, :text_field, to: :browser
 
     def browser
-      driver = Rails.env.production? ? :phantomjs : :chrome
-      Watir::Browser.new(driver)
+      Watir::Browser.new(:chrome, driver_options)
     end
 
     def goto_product_page(url, select_default: false)
@@ -37,6 +36,11 @@ class Amazon
       return if !size_select.exists? || size_select.value != '-1'
       main_option = size_select.options.find { |option| option.attribute_value('value') != '-1' }
       main_option.click
+    end
+
+    def driver_options
+      return unless Rails.env.production?
+      { chromeOptions: { binary: '/app/.apt/usr/bin/google-chrome' } }
     end
 
     memoize :browser
