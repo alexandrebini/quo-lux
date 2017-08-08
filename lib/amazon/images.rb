@@ -8,11 +8,13 @@ class Amazon
     private
 
     def elements
-      browser.elements(css: '.imgTagWrapper img')
+      browser.elements(css: '.imgTagWrapper img').select(&:exists?)
     end
 
     def enable_images!
-      browser.elements(css: '#altImages li.imageThumbnail img').each(&:hover)
+      thumbnails = browser.elements(css: '#altImages li.imageThumbnail img').select(&:exists?)
+      return if thumbnails.blank?
+      thumbnails.each(&:hover)
     end
 
     def images
